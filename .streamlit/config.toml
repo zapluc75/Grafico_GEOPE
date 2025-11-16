@@ -1,7 +1,5 @@
 [theme]
 baseFontWeight = 600
-chartCategoricalColors = ["#fff700ff", "#00ff0dff", "#ff2b2b", "#ffabab", "#ffabab"]
-dataframeHeaderBackgroundColor = "#00ff0dff"
 headingFontWeights = 800
 
 [runner]
