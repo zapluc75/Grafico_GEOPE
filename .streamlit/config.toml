@@ -1,4 +1,9 @@
 [theme]
+primaryColor = "#fbff00ff"       # verde cor dos botões
+backgroundColor = "#000000ff"    # branco fundo da página
+secondaryBackgroundColor = "#383737ff"
+
+textColor = "#ffffffff"
 baseFontWeight = 600
 headingFontWeights = 800
 
