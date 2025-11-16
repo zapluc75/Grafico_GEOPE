@@ -25,7 +25,7 @@ if arquivo:
             go.Table(
                 header=dict(
                     values=list(df.columns),
-                    fill_color="00ff2f",
+                    fill_color="lightgreen",
                     align="center",font=dict(color="black", size=12)
                 ),
                 cells=dict(
