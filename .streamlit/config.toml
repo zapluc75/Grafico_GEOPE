@@ -1,0 +1,15 @@
+[runner]
+# Define se o Streamlit deve refazer a execução completa do script
+# quando há interações do usuário. Mantenha como true para a maioria dos apps.
+# Isso garante que as interações do Plotly funcionem corretamente.
+magicEnabled = true
+
+# Define em quanto tempo o Streamlit verifica se há mudanças no código-fonte
+# em segundos. Ajuste se você estiver em um ambiente com latência de rede.
+# fileWatcherType = "auto"
+# pollingInterval = 1000
+
+# Se você estiver implantando em um ambiente restrito onde o forking é um problema,
+# pode tentar usar 'threading', mas 'fork' é o padrão e mais comum.
+# runtime = "fork" 
+
