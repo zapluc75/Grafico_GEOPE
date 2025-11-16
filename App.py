@@ -25,13 +25,13 @@ if arquivo:
             go.Table(
                 header=dict(
                     values=list(df.columns),
-                    fill_color="black",
-                    align="center",font=dict(color="white", size=12)
+                    fill_color="#00ff0dff",
+                    align="center",font=dict(color="black", size=12)
                 ),
                 cells=dict(
                     values=[df[c].tolist() for c in df.columns],
                     fill_color="gray",
-                    align="center",font=dict(color="black", size=14)
+                    align="center",font=dict(color="white", size=14)
                 )
             )
         ]
