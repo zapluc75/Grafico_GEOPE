@@ -48,21 +48,21 @@ if arquivo:
     with cl2:
         st.subheader("📊 Gráfico de Barras")
     
-        col_nome_x = st.selectbox("Coluna para eixo X", df.columns)
-        col_nome_y = st.selectbox("Coluna para eixo Y", df.columns)
+    col_nome_x = st.selectbox("Coluna para eixo X", df.columns)
+    col_nome_y = st.selectbox("Coluna para eixo Y", df.columns)
     
-        fig_barra = px.bar(
-            df,
-            x=col_nome_x,
-            y=col_nome_y,
-            title=f"Gráfico de Barras de {col_nome_y} por {col_nome_x}",
-            labels={col_nome_x: "Categoria", col_nome_y: "Valor"},
-            hover_data={col_nome_x: True, col_nome_y: True},
-            color=col_nome_x,
-            text_auto=True
-        )
+    fig_barra = px.bar(
+        df,
+        x=col_nome_x,
+        y=col_nome_y,
+        title=f"Gráfico de Barras de {col_nome_y} por {col_nome_x}",
+        labels={col_nome_x: "Categoria", col_nome_y: "Valor"},
+        hover_data={col_nome_x: True, col_nome_y: True},
+        color=col_nome_x,
+        text_auto=True
+    )
     
-        st.plotly_chart(fig_barra, use_container_width=True)
+    st.plotly_chart(fig_barra, use_container_width=True)
   
 else:
     st.info("Envie um arquivo Excel na barra lateral para começar.")
