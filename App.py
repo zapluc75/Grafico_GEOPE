@@ -55,7 +55,7 @@ if arquivo:
         df,
         x=col_nome_x,
         y=col_nome_y,
-        title=f"Gráfico de Barras de {[col_nome_y]:blue} por {[col_nome_x]:blue}",
+        title=f"Gráfico de Barras de {col_nome_y} por {col_nome_x}",
         labels={col_nome_x: "Categoria", col_nome_y: "Valor"},
         hover_data={col_nome_x: True, col_nome_y: True},
         color=col_nome_x,
