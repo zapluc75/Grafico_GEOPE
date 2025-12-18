@@ -62,7 +62,6 @@ if arquivo:
         text_auto=True
     )
     
-    st.plotly_chart(fig_barra, use_container_width=True)
-  
+    st.plotly_chart(fig_barra, use_container_width=True)  
 else:
     st.info("Envie um arquivo Excel na barra lateral para começar.")
