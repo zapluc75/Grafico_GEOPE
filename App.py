@@ -54,8 +54,8 @@ if arquivo:
     modo = st.sidebar.selectbox("Modo do gráfico", ["Normal", "Invertido"])
 
     if modo == "Normal":
-        col_nome_x = st.selectbox("Coluna para eixo X", df.columns)
-        col_nome_y = st.selectbox("Coluna para eixo Y", df.columns)
+        col_nome_x = st.sidebar.selectbox("Coluna para eixo X", df.columns)
+        col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", df.columns)
 
         fig_barra = px.bar(
             df,
