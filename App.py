@@ -51,7 +51,7 @@ if arquivo:
         st.subheader("📊 Gráfico de Barras")
 
     # 🔁 NOVO: opção dinâmica
-    modo = st.selectbox("Modo do gráfico", ["Normal", "Invertido"])
+    modo = st.sidebar.selectbox("Modo do gráfico", ["Normal", "Invertido"])
 
     if modo == "Normal":
         col_nome_x = st.selectbox("Coluna para eixo X", df.columns)
