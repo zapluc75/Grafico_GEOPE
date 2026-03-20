@@ -71,11 +71,13 @@ if arquivo:
     else:
         # 🔄 Inversão (transposição)
         try:
-            df_t = df.set_index(df.columns[0]).T
+            col_indice = st.sidebar.selectbox("Coluna base (será o eixo após inversão)", df.columns)
+
+            df_t = df.set_index(col_indice).T # Transposição usando a coluna escolhida
 
             fig_barra = px.bar(
                 df_t,
-                title="Gráfico Invertido (Linhas ↔ Colunas)",
+                title=f"Gráfico Invertido (base: {col_indice})",
                 labels={"value": "Valor", "index": "Categoria"},
                 text_auto=True
             )
