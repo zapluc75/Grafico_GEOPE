@@ -85,8 +85,8 @@ if arquivo:
         
                     st.plotly_chart(fig_barra, use_container_width=True)
                         
-                except Exception as e:
-                    st.warning(f"Não foi possível usar '{col_indice}' como base: {e}")
+                 except Exception as e:
+                     st.warning(f"Não foi possível usar '{col_indice}' como base: {e}")
                 
         except Exception as e:
             st.error(f"Erro ao inverter os dados: {e}")
