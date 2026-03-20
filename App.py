@@ -73,8 +73,7 @@ if arquivo:
         try:
              for col_indice in df.columns:
                  st.markdown(f"### 📌 Base: {col_indice}")
-
-                try:
+                 try:
                     df_t = df.set_index(col_indice).T
         
                     fig_barra = px.bar(
@@ -85,7 +84,7 @@ if arquivo:
                     )
         
                     st.plotly_chart(fig_barra, use_container_width=True)
-        
+                        
                 except Exception as e:
                     st.warning(f"Não foi possível usar '{col_indice}' como base: {e}")
                 
