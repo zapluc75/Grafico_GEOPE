@@ -72,7 +72,7 @@ if arquivo:
         # 🔄 Inversão (transposição)
         try:
             col_nome_x = st.sidebar.selectbox("Coluna para eixo X", df.columns).T
-            col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", df.columns).T
+            col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", df.columns)
             
             fig_barra = px.bar(
                 df_t,
