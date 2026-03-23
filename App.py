@@ -80,9 +80,9 @@ if arquivo:
                 text_auto=True
             )
                    
-    except Exception as e:
-        st.error(f"Erro ao inverter os dados: {e}")
-        st.stop()
+        except Exception as e:
+            st.error(f"Erro ao inverter os dados: {e}")
+            st.stop()
 
     st.plotly_chart(fig_barra, use_container_width=True)
    
