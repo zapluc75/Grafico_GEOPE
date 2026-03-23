@@ -72,7 +72,7 @@ if arquivo:
         # 🔄 Inversão (transposição)
         try:
             # 🔁 Usuário escolhe a coluna que vira índice
-            col_indice = st.selectbox("Coluna base (será o eixo após inversão)", df.columns)
+            col_indice = st.sidebar.selectbox("Coluna base (será o eixo após inversão)", df.columns)
 
             df_t = df.set_index(col_indice).T
             
