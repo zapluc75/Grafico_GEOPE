@@ -14,6 +14,7 @@ arquivo = st.sidebar.file_uploader("Envie o arquivo Excel (.xlsx)", type=["xlsx"
 if arquivo:
     try:
         plan = pd.read_excel(arquivo)
+        plan_t = plan.T
         st.success("Dados carregados com sucesso!")
     except Exception as e:
         st.error(f"Erro ao carregar o arquivo: {e}")
@@ -72,14 +73,17 @@ if arquivo:
         # 🔄 Inversão (transposição)
         try:
             # 🔁 Usuário escolhe a coluna que vira índice
-            col_indice = st.sidebar.selectbox("Coluna base (será o eixo após inversão)", plan.columns)
-
-            plan_t = plan.set_index(col_indice).T
-            
+            col_nome_x = st.sidebar.selectbox("Coluna para eixo X", plan_t.columns)
+            col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", plan_t.columns)
+                                  
             fig_barra = px.bar(
                 plan_t,
-                title=f"Gráfico Invertido (base: {col_indice})",
-                labels={"value": "Valor", "index": "Categoria"},
+                x=col_nome_x,
+                y=col_nome_y,
+                title=f"{col_nome_y} por {col_nome_x}",
+                labels={col_nome_x: "Categoria", col_nome_y: "Valor"},
+                hover_data={col_nome_x: True, col_nome_y: True},
+                color=col_nome_x,
                 text_auto=True
             )
                    
