@@ -13,7 +13,7 @@ arquivo = st.sidebar.file_uploader("Envie o arquivo Excel (.xlsx)", type=["xlsx"
 
 if arquivo:
     try:
-        df = pd.read_excel(arquivo)
+        plan = pd.read_excel(arquivo)
         st.success("Dados carregados com sucesso!")
     except Exception as e:
         st.error(f"Erro ao carregar o arquivo: {e}")
@@ -27,13 +27,13 @@ if arquivo:
             data=[
                 go.Table(
                     header=dict(
-                        values=list(df.columns),
+                        values=list(plan.columns),
                         fill_color="lightgreen",
                         align="center",
                         font=dict(color="black", size=12)
                     ),
                     cells=dict(
-                        values=[df[c].tolist() for c in df.columns],
+                        values=[plan[c].tolist() for c in plan.columns],
                         fill_color="gray",
                         align="center",
                         font=dict(color="white", size=14)
@@ -54,11 +54,11 @@ if arquivo:
     modo = st.sidebar.selectbox("Modo do gráfico", ["Normal", "Invertido"])
 
     if modo == "Normal":
-        col_nome_x = st.sidebar.selectbox("Coluna para eixo X", df.columns)
-        col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", df.columns)
+        col_nome_x = st.sidebar.selectbox("Coluna para eixo X", plan.columns)
+        col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", plan.columns)
 
         fig_barra = px.bar(
-            df,
+            plan,
             x=col_nome_x,
             y=col_nome_y,
             title=f"{col_nome_y} por {col_nome_x}",
@@ -72,12 +72,12 @@ if arquivo:
         # 🔄 Inversão (transposição)
         try:
             # 🔁 Usuário escolhe a coluna que vira índice
-            col_indice = st.sidebar.selectbox("Coluna base (será o eixo após inversão)", df.columns)
+            col_indice = st.sidebar.selectbox("Coluna base (será o eixo após inversão)", plan.columns)
 
-            df_t = df.set_index(col_indice).T
+            plan_t = plan.set_index(col_indice).T
             
             fig_barra = px.bar(
-                df_t,
+                plan_t,
                 title=f"Gráfico Invertido (base: {col_indice})",
                 labels={"value": "Valor", "index": "Categoria"},
                 text_auto=True
