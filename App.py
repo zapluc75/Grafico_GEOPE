@@ -71,17 +71,15 @@ if arquivo:
     else:
         # 🔄 Inversão (transposição)
         try:
-            col_nome_x = st.sidebar.selectbox("Coluna para eixo X", df.columns).T
-            col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", df.columns)
+            # 🔁 Usuário escolhe a coluna que vira índice
+            col_indice = st.selectbox("Coluna base (será o eixo após inversão)", df.columns)
+
+            df_t = df.set_index(col_indice).T
             
             fig_barra = px.bar(
                 df_t,
-                x=col_nome_x,
-                y=col_nome_y,
-                title=f"{col_nome_y} por {col_nome_x}",
-                labels={col_nome_x: "Categoria", col_nome_y: "Valor"},
-                hover_data={col_nome_x: True, col_nome_y: True},
-                color=col_nome_x,
+                title=f"Gráfico Invertido (base: {col_indice})",
+                labels={"value": "Valor", "index": "Categoria"},
                 text_auto=True
             )
                    
