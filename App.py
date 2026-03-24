@@ -72,6 +72,7 @@ if arquivo:
     else:
         # Transpõe
         df_base = plan.copy()
+        df_base = df_base.set_index(df_base.columns[0])
         df_base = df_base.T
 
         # 🔧 Ajuste de índice e colunas
