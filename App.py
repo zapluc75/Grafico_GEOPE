@@ -14,7 +14,7 @@ arquivo = st.sidebar.file_uploader("Envie o arquivo Excel (.xlsx)", type=["xlsx"
 if arquivo:
     try:
         plan = pd.read_excel(arquivo)
-        plan_t = plan.T
+        plan_t = pd.read_excel(arquivo).T
         st.success("Dados carregados com sucesso!")
     except Exception as e:
         st.error(f"Erro ao carregar o arquivo: {e}")
