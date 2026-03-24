@@ -42,7 +42,7 @@ if arquivo:
                 )
             ]
         )
-     st.plotly_chart(fig_tabela, use_container_width=True)      
+           
         st.subheader("📄 Tabela Invertida")
         fig_tabela_t = go.Figure(
             data=[
@@ -62,7 +62,7 @@ if arquivo:
                 )
             ]
         )
-    
+    st.plotly_chart(fig_tabela, use_container_width=True)
     st.plotly_chart(fig_tabela_t, use_container_width=True)
 
     # --- Configuração do Gráfico ---
