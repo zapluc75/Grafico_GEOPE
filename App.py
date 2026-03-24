@@ -43,28 +43,8 @@ if arquivo:
             ]
         )
            
-        st.subheader("📄 Tabela Invertida")
-        fig_tabela_t = go.Figure(
-            data=[
-                go.Table(
-                    header=dict(
-                        values=list(plan_t.columns),
-                        fill_color="lightgreen",
-                        align="center",
-                        font=dict(color="black", size=12)
-                    ),
-                    cells=dict(
-                        values=[plan_t[c].tolist() for c in plan_t.columns],
-                        fill_color="gray",
-                        align="center",
-                        font=dict(color="white", size=14)
-                    )
-                )
-            ]
-        )
     st.plotly_chart(fig_tabela, use_container_width=True)
-    st.plotly_chart(fig_tabela_t, use_container_width=True)
-
+    
     # --- Configuração do Gráfico ---
     cl1, cl2, cl3 = st.columns([1, 2, 1])
 
