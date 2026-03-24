@@ -90,23 +90,29 @@ if arquivo:
         )
 
     else:
-        # 🔄 Inversão (transposição)
-        try:
-            # 🔁 Usuário escolhe a coluna que vira índice
-            col_nome_x = st.sidebar.selectbox("Coluna para eixo X", plan_t.columns)
-            col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", plan_t.columns)
-                                  
-            fig_barra = px.bar(
-                plan_t,
-                x=col_nome_x,
-                y=col_nome_y,
-                title=f"{col_nome_y} por {col_nome_x}",
-                labels={col_nome_x: "Categoria", col_nome_y: "Valor"},
-                hover_data={col_nome_x: True, col_nome_y: True},
-                color=col_nome_x,
-                text_auto=True
-            )
-                   
+        # Transpõe
+        df_base = plan.copy()
+        df_base = df_base.T
+
+        # 🔧 Ajuste de índice e colunas
+        df_base = df_base.reset_index()
+        df_base = df_base.rename(columns={"index": "Categoria"})
+
+    # 🎯 Seleção dinâmica após possível transposição
+    col_nome_x = st.sidebar.selectbox("Coluna para eixo X", df_base.columns)
+    col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", df_base.columns)
+
+    fig_barra = px.bar(
+        df_base,
+        x=col_nome_x,
+        y=col_nome_y,
+        title=f"{col_nome_y} por {col_nome_x}",
+        labels={col_nome_x: "Categoria", col_nome_y: "Valor"},
+        hover_data={col_nome_x: True, col_nome_y: True},
+        color=col_nome_x,
+        text_auto=True
+    )
+                          
         except Exception as e:
             st.error(f"Erro ao inverter os dados: {e}")
             st.stop()
