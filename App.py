@@ -48,8 +48,8 @@ if arquivo:
     with cl2:
         st.subheader("📊 Gráfico de Barras")
     
-    col_nome_x = st.selectbox("Coluna para eixo X", df.columns)
-    col_nome_y = st.selectbox("Coluna para eixo Y", df.columns)
+    col_nome_x = st.sidebar.selectbox("Coluna para eixo X", df.columns)
+    col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", df.columns)
     
     fig_barra = px.bar(
         df,
