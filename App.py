@@ -104,7 +104,7 @@ if arquivo:
             hover_data={col_nome_x: True, col_nome_y: True},
             color=col_nome_x,
             text_auto=True
-        )
+            )
                        
     
     st.plotly_chart(fig_barra, use_container_width=True)  
