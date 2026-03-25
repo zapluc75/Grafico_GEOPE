@@ -95,7 +95,16 @@ if arquivo:
             )
     else:
         df_t = df.set_index("MÊS").T
-        fig_barra = px.bar(df_t)
+        fig_barra = px.bar(
+            df_t,
+            x=col_nome_x,
+            y=col_nome_y,
+            title=f"Gráfico de : {col_nome_y} por {col_nome_x}",
+            labels={col_nome_x: "Categoria", col_nome_y: "Valor"},
+            hover_data={col_nome_x: True, col_nome_y: True},
+            color=col_nome_x,
+            text_auto=True
+        )
                        
     
     st.plotly_chart(fig_barra, use_container_width=True)  
