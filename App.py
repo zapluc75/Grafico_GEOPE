@@ -10,7 +10,6 @@ st.title("📊 Visualização de Dados – NUOPA")
 # --- Upload do arquivo ---
 st.sidebar.header("Configurações")
 arquivo = st.sidebar.file_uploader("Envie o arquivo Excel (.xlsx)", type=["xlsx"])
-
 opcao = st.sidebar.selectbox("Modo do gráfico", ["Normal", "Invertido"])
 
 if arquivo:
@@ -23,24 +22,54 @@ if arquivo:
 
     col1, col2, col3 = st.columns([1, 2, 1]) # Proporção de largura: 1/4, 2/4 (metade), 1/4
 
-    with col2:
-        st.subheader("📄 Tabela Completa")
-        fig_tabela = go.Figure(
-            data=[
-                go.Table(
-                    header=dict(
-                        values=list(df.columns),
-                        fill_color="lightgreen",
-                        align="center",font=dict(color="black", size=12)
-                    ),
-                    cells=dict(
-                        values=[df[c].tolist() for c in df.columns],
-                        fill_color="gray",
-                        align="center",font=dict(color="white", size=14)
-                    )
+    if opcao == "Normal":
+        with col2:
+            st.subheader("📄 Tabela Completa")
+            fig_tabela = go.Figure(
+                data=[
+                    go.Table(
+                        header=dict(
+                            values=list(df.columns),
+                            fill_color="lightgreen",
+                            align="center",font=dict(color="black", size=12)
+                            ),
+                        cells=dict(
+                            values=[df[c].tolist() for c in df.columns],
+                            fill_color="gray",
+                            align="center",font=dict(color="white", size=14)
+                            )
+                        )
+                    ]
                 )
-            ]
-        )
+    else:
+        df_invertido = df.set_index(df.columns[0]).T # Transpor mantendo a primeira coluna como referência (índice)
+
+        df_invertido.reset_index(inplace=True) # Resetar índice para virar coluna novamente (melhor pra exibição)
+
+        df_invertido.rename(columns={"index": df.columns[0]}, inplace=True) # Renomear a coluna criada a partir do índice
+
+        with col2:
+            st.subheader("🔄 Tabela Invertida")
+
+            fig_tabela = go.Figure(
+                data=[
+                    go.Table(
+                        header=dict(
+                            values=list(df_invertido.columns),
+                            fill_color="lightgreen",
+                            align="center",
+                            font=dict(color="black", size=12)
+                        ),
+                        cells=dict(
+                            values=[df_invertido[c].tolist() for c in df_invertido.columns],
+                            fill_color="gray",
+                            align="center",
+                            font=dict(color="white", size=14)
+                        )
+                    )
+                ]
+            )
+            
 
     st.plotly_chart(fig_tabela, use_container_width=True)
     
