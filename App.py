@@ -34,12 +34,12 @@ if arquivo:
                 header=dict(
                     values=list(df_base.columns),
                     fill_color="lightgreen",
-                    align="center"
+                    align="center",font=dict(color="black", size=12)
                 ),
                 cells=dict(
                     values=[df_base[c] for c in df_base.columns],
                     fill_color="gray",
-                    align="center"
+                    align="center",font=dict(color="white", size=14)
                 )
             )
         ])
