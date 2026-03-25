@@ -65,7 +65,7 @@ if arquivo:
             text_auto=True
             )
     else:
-        df_t = df.set_index("MES").T
+        df_t = df.set_index("MÊS").T
         fig_barra = px.bar(df_t)
                        
     
