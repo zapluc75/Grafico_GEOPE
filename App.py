@@ -13,14 +13,13 @@ arquivo = st.sidebar.file_uploader("Envie o arquivo Excel (.xlsx)", type=["xlsx"
 
 if arquivo:
     try:
-        plan = pd.read_excel(arquivo)
-        plan_t = pd.read_excel(arquivo).T
+        df = pd.read_excel(arquivo)
         st.success("Dados carregados com sucesso!")
     except Exception as e:
         st.error(f"Erro ao carregar o arquivo: {e}")
         st.stop()
 
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col1, col2, col3 = st.columns([1, 2, 1]) # Proporção de largura: 1/4, 2/4 (metade), 1/4
 
     with col2:
         st.subheader("📄 Tabela Completa")
@@ -28,74 +27,41 @@ if arquivo:
             data=[
                 go.Table(
                     header=dict(
-                        values=list(plan.columns),
+                        values=list(df.columns),
                         fill_color="lightgreen",
-                        align="center",
-                        font=dict(color="black", size=12)
+                        align="center",font=dict(color="black", size=12)
                     ),
                     cells=dict(
-                        values=[plan[c].tolist() for c in plan.columns],
+                        values=[df[c].tolist() for c in df.columns],
                         fill_color="gray",
-                        align="center",
-                        font=dict(color="white", size=14)
+                        align="center",font=dict(color="white", size=14)
                     )
                 )
             ]
         )
-           
+
     st.plotly_chart(fig_tabela, use_container_width=True)
     
     # --- Configuração do Gráfico ---
-    cl1, cl2, cl3 = st.columns([1, 2, 1])
+    cl1, cl2, cl3 = st.columns([1, 2, 1]) # Proporção de largura: 1/4, 2/4 (metade), 1/4
 
     with cl2:
         st.subheader("📊 Gráfico de Barras")
-
-    # 🔁 NOVO: opção dinâmica
-    modo = st.sidebar.selectbox("Modo do gráfico", ["Normal", "Invertido"])
-
-    if modo == "Normal":
-        col_nome_x = st.sidebar.selectbox("Coluna para eixo X", plan.columns)
-        col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", plan.columns)
-
-        fig_barra = px.bar(
-            plan,
-            x=col_nome_x,
-            y=col_nome_y,
-            title=f"{col_nome_y} por {col_nome_x}",
-            labels={col_nome_x: "Categoria", col_nome_y: "Valor"},
-            hover_data={col_nome_x: True, col_nome_y: True},
-            color=col_nome_x,
-            text_auto=True
-        )
-
-    else:
-        # Transpõe
-        df_base = plan.copy()
-        df_base = df_base.set_index(df_base.columns[0])
-        df_base = df_base.T
-
-        # 🔧 Ajuste de índice e colunas
-        df_base = df_base.reset_index()
-        df_base = df_base.rename(columns={"index": "Categoria"})
-
-        # 🎯 Seleção dinâmica após possível transposição
-        col_nome_x = st.sidebar.selectbox("Coluna para eixo X", df_base.columns)
-        col_nome_y = st.sidebar.selectbox("Coluna para eixo Y", df_base.columns)
-
-        fig_barra = px.bar(
-            df_base,
-            x=col_nome_x,
-            y=col_nome_y,
-            title=f"{col_nome_y} por {col_nome_x}",
-            labels={col_nome_x: "Categoria", col_nome_y: "Valor"},
-            hover_data={col_nome_x: True, col_nome_y: True},
-            color=col_nome_x,
-            text_auto=True
-        )
-                          
-
-    st.plotly_chart(fig_barra, use_container_width=True)
-   
+    
+    col_nome_x = st.selectbox("Coluna para eixo X", df.columns)
+    col_nome_y = st.selectbox("Coluna para eixo Y", df.columns)
+    
+    fig_barra = px.bar(
+        df,
+        x=col_nome_x,
+        y=col_nome_y,
+        title=f"Gráfico de Barras de {col_nome_y} por {col_nome_x}",
+        labels={col_nome_x: "Categoria", col_nome_y: "Valor"},
+        hover_data={col_nome_x: True, col_nome_y: True},
+        color=col_nome_x,
+        text_auto=True
+    )
+    
+    st.plotly_chart(fig_barra, use_container_width=True)  
 else:
     st.info("Envie um arquivo Excel na barra lateral para começar.")
