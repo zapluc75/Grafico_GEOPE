@@ -24,7 +24,7 @@ if arquivo:
     df_base = df if opcao == "Normal" else df.T.reset_index()
 
     # --- TABELA ---
-    col1, col2, col3 = st.columns([1, 4, 1])
+    col1, col2, col3 = st.columns([1, 5, 1])
 
     with col2:
         st.subheader("📄 Tabela")
