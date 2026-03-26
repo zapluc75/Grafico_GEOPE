@@ -46,7 +46,7 @@ if arquivo:
                 cells=dict(
                     values=[df_base[c] for c in df_base.columns],
                     fill_color="gray",
-                    align="center",font=dict(color="brown", size=9)
+                    align="center",font=dict(color="black", size=9)
                 )
             )
         ])
