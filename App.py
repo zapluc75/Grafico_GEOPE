@@ -21,7 +21,7 @@ if arquivo:
         st.stop()
 
     # 🔁 Define qual DataFrame será usado
-    df_base = df if opcao == "Normal" else df.T.reset_index()
+    df_base = df if opcao == "Normal" else df.T.reset_index(df_base.columns[0])
 
     # --- TABELA ---
     col1, col2, col3 = st.columns([1, 7, 1])
