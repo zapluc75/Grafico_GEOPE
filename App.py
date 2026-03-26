@@ -55,9 +55,9 @@ if arquivo:
         df_base,
         x=df_base.columns[0],
         y=col_nome_y,
-        color=col_nome_x,
+        color=x,
         text_auto=True,
-        title=f"{col_nome_y} por {col_nome_x}"
+        title=f"{col_nome_y} por {x}"
     )
 
     st.plotly_chart(fig_barra, use_container_width=True)
