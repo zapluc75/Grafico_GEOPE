@@ -49,12 +49,11 @@ if arquivo:
     # --- GRÁFICO ---
     st.subheader("📊 Gráfico de Barras")
 
-    col_nome_x = st.sidebar.selectbox("Eixo X", df_base.columns)
     col_nome_y = st.sidebar.selectbox("Eixo Y", df_base.columns)
 
     fig_barra = px.bar(
         df_base,
-        x=col_nome_x,
+        x=df_base.columns[0],
         y=col_nome_y,
         color=col_nome_x,
         text_auto=True,
