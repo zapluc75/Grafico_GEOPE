@@ -11,6 +11,7 @@ st.title("📊 Visualização de Dados – NUOPA")
 st.sidebar.header("Configurações")
 arquivo = st.sidebar.file_uploader("Envie o Excel (.xlsx)", type=["xlsx"])
 opcao = st.sidebar.selectbox("Modo", ["Normal", "Invertido"])
+usar_col0 = st.sidebar.checkbox("Usar 1ª coluna como referência (índice)", value=True)
 
 if arquivo:
     try:
@@ -21,7 +22,13 @@ if arquivo:
         st.stop()
 
     # 🔁 Define qual DataFrame será usado
-    df_base = df if opcao == "Normal" else df.T.reset_index(df_base.columns[0])
+    if opcao == "Normal":
+        df_base = df
+    else:
+        if usar_col0:
+            df_base = df.set_index(df.columns[0]).T.reset_index()
+        else:
+            df_base = df.T.reset_index()
 
     # --- TABELA ---
     col1, col2, col3 = st.columns([1, 7, 1])
