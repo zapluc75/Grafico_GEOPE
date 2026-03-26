@@ -48,16 +48,17 @@ if arquivo:
 
     # --- GRÁFICO ---
     st.subheader("📊 Gráfico de Barras")
-
+    
+    col_nome_x = df_base.columns[0]
     col_nome_y = st.sidebar.selectbox("Eixo Y", df_base.columns)
 
     fig_barra = px.bar(
         df_base,
-        x=df_base.columns[0],
+        x=col_nome_x,
         y=col_nome_y,
-        color=df_base.columns[0],
+        color=col_nome_x,
         text_auto=True,
-        title=f"{col_nome_y} por {df_base.columns[0]}"
+        title=f"{col_nome_y} por {col_nome_x}"
     )
 
     st.plotly_chart(fig_barra, use_container_width=True)
